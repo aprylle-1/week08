@@ -15,7 +15,7 @@ jobs:
     needs: deploy_backend
     uses: ./.github/workflows/frontend-cd.yml
     with:
-      product_api_ip: ${{ jobs.deploy_backend.outputs.PRODUCT_API_IP }}
-      order_api_ip: ${{ jobs.deploy_backend.outputs.ORDER_API_IP }}
+      product_api_ip: ${{ needs.deploy_backend.outputs.PRODUCT_API_IP }}
+      order_api_ip: ${{ needs.deploy_backend.outputs.ORDER_API_IP }}
       aks_cluster_name: 'week08aks'
       aks_resource_group: 'week08-rg'
