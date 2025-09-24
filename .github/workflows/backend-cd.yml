@@ -30,6 +30,13 @@ on:
     secrets:
       AZURE_CREDENTIALS:
         required: true
+    outputs:
+      PRODUCT_API_IP:
+        description: 'Product Service IP'
+        value: ${{ jobs.deploy_backend.outputs.PRODUCT_API_IP }}
+      ORDER_API_IP:
+        description: 'Order Service IP'
+        value: ${{ jobs.deploy_backend.outputs.ORDER_API_IP }}
 
 jobs:
   deploy_backend:
