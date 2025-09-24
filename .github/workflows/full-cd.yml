@@ -1,0 +1,21 @@
+name: Full CD Pipeline
+
+on:
+  workflow_dispatch:
+
+jobs:
+  deploy_backend:
+    uses: ./.github/workflows/backend-cd.yml
+    with:
+      aks_cluster_name: 'week08aks'
+      aks_resource_group: 'week08-rg'
+      aks_acr_name: 'aprylleweek08acr'
+
+  deploy_frontend:
+    needs: deploy_backend
+    uses: ./.github/workflows/frontend-cd.yml
+    with:
+      product_api_ip: ${{ jobs.deploy_backend.outputs.PRODUCT_API_IP }}
+      order_api_ip: ${{ jobs.deploy_backend.outputs.ORDER_API_IP }}
+      aks_cluster_name: 'week08aks'
+      aks_resource_group: 'week08-rg'
