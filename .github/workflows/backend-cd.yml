@@ -18,7 +18,7 @@ on:
     
   workflow_call:
     inputs:
-      aks_acr_name:
+      aks_cluster_name:
         required: true
         type: string
       aks_resource_group:
