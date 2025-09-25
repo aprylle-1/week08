@@ -119,7 +119,7 @@ jobs:
 
   # Job 2: Build and Push Docker Images (runs only if tests pass)
   build_and_push_images:
-    if: github.ref == 'refs/heads/main' # Only run this job on main branch
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push' # Only run this job on main branch and the event is a push
     runs-on: ubuntu-latest
     needs: test_and_lint_backends
 
