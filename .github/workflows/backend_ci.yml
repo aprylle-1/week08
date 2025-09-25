@@ -12,6 +12,7 @@ on:
   push:
     branches:
       - main
+      - 'features/**' # Also trigger on feature branches
     paths: # Only trigger if changes are in backend directories
       - 'backend/**'
       - '.github/workflows/backend_ci.yml' # Trigger if this workflow file changes
@@ -111,6 +112,7 @@ jobs:
 
   # Job 2: Build and Push Docker Images (runs only if tests pass)
   build_and_push_images:
+    if: github.ref == 'refs/heads/main' # Only run this job on main branch
     runs-on: ubuntu-latest
     needs: test_and_lint_backends
 
